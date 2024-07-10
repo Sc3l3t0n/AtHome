@@ -1,0 +1,15 @@
+﻿<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>net8.0</TargetFramework>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <SignAssembly>False</SignAssembly>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\AtHome.ServiceDefaults\AtHome.ServiceDefaults.csproj" />
+    <ProjectReference Include="..\AtHome.Shared\AtHome.Shared.csproj" />
+  </ItemGroup>
+
+</Project>

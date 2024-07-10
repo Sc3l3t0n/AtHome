@@ -1,0 +1,17 @@
+﻿@page "/item-list"
+
+<h3>ItemList</h3>
+
+@if (!_data.Any())
+{
+    <p>...loading</p>
+}
+<div class="list-group">
+    Lol
+    @foreach (var item in _data)
+    {
+        <a href="/ItemList" class="list-group-item list-group-item-action">
+            @item.Name
+        </a>
+    }
+</div>

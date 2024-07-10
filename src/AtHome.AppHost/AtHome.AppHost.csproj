@@ -1,0 +1,23 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+    <PropertyGroup>
+        <OutputType>Exe</OutputType>
+        <TargetFramework>net8.0</TargetFramework>
+        <ImplicitUsings>enable</ImplicitUsings>
+        <Nullable>enable</Nullable>
+        <IsAspireHost>true</IsAspireHost>
+        <UserSecretsId>55D4CAD2-6EC4-46E7-BFB0-96DF831D4885</UserSecretsId>
+        <RootNamespace>AtHome.AppHost</RootNamespace>
+    </PropertyGroup>
+
+    <ItemGroup>
+        <PackageReference Include="Aspire.Hosting.AppHost" Version="8.0.2" />
+        <PackageReference Include="Aspire.Hosting.PostgreSQL" Version="8.0.2" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <ProjectReference Include="..\AtHome.WebAPI\AtHome.WebApi.csproj" />
+      <ProjectReference Include="..\AtHome.Web\AtHome.Web.csproj" />
+    </ItemGroup>
+
+</Project>
