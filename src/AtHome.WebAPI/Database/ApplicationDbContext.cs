@@ -1,5 +1,4 @@
-using AtHome.WebApi.Models;
-using Microsoft.EntityFrameworkCore;
+using AtHome.Shared.Models;
 
 namespace AtHome.WebApi.Database;
 

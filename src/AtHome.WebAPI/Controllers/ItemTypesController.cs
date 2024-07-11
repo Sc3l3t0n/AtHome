@@ -1,3 +1,4 @@
+using AtHome.Shared.Models;
 using AtHome.WebApi.Filter;
 using AtHome.WebApi.Interfaces;
 using AtHome.WebApi.Models;

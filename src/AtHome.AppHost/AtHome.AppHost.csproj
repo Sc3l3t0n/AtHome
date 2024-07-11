@@ -16,6 +16,7 @@
     </ItemGroup>
 
     <ItemGroup>
+      <ProjectReference Include="..\AtHome.MigrationService\AtHome.MigrationService.csproj" />
       <ProjectReference Include="..\AtHome.WebAPI\AtHome.WebApi.csproj" />
       <ProjectReference Include="..\AtHome.Web\AtHome.Web.csproj" />
     </ItemGroup>

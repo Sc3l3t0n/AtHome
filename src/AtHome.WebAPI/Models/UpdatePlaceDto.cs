@@ -1,4 +1,5 @@
-﻿using AtHome.WebApi.Interfaces;
+﻿using AtHome.Shared.Models;
+using AtHome.WebApi.Interfaces;
 
 namespace AtHome.WebApi.Models;
 

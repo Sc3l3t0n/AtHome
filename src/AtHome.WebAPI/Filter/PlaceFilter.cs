@@ -1,5 +1,5 @@
 using AtHome.WebApi.Interfaces;
-using AtHome.WebApi.Models;
+using AtHome.Shared.Models;
 
 namespace AtHome.WebApi.Filter;
 

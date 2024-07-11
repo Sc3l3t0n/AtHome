@@ -24,6 +24,7 @@
 
     <ItemGroup>
       <ProjectReference Include="..\AtHome.ServiceDefaults\AtHome.ServiceDefaults.csproj" />
+      <ProjectReference Include="..\AtHome.Shared\AtHome.Shared.csproj" />
     </ItemGroup>
 
 </Project>
