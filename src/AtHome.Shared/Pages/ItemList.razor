@@ -2,16 +2,33 @@
 
 <h3>ItemList</h3>
 
-@if (!_data.Any())
+@if (_data.IsError)
 {
-    <p>...loading</p>
-}
-<div class="list-group">
-    Lol
-    @foreach (var item in _data)
+    @switch (_data.FirstError.Code)
     {
-        <a href="/ItemList" class="list-group-item list-group-item-action">
-            @item.Name
-        </a>
+        case "Task.Failed":
+            <div class="alert alert-danger" role="alert">
+                <p>
+                    @_data.FirstError.Code
+                </p>
+                <p>
+                    @_data.FirstError.Description
+                </p>
+            </div>
+            break;
+        case "Api.NotLoaded":
+            <p>...loading</p>
+            break;
     }
-</div>
+}
+else
+{
+    <div class="list-group">
+        @foreach (var item in _data.Value)
+        {
+            <a href="/ItemList" class="list-group-item list-group-item-action">
+                @item.Name
+            </a>
+        }
+    </div>
+}
