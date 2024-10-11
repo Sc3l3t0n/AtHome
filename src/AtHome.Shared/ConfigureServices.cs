@@ -1,12 +1,28 @@
-﻿using Microsoft.Extensions.DependencyInjection;
+﻿using AtHome.Shared.Handler;
+using AtHome.Shared.Services;
+using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.DependencyInjection;
+using Refit;
 
 namespace AtHome.Shared;
 
 public static class ConfigureServices
 {
-    public static IServiceCollection AddSharedServices(this IServiceCollection services)
+    public static IServiceCollection AddSharedServices(this IServiceCollection services, IConfiguration configuration)
     {
-        services.AddScoped<HttpClient>();
+        services.AddRefitClients(configuration);
+        
+        return services;
+    }
+    
+    private static IServiceCollection AddRefitClients(this IServiceCollection services, IConfiguration configuration)
+    {
+        services.AddScoped<HttpAuthenticationHandler>();
+        services.AddSingleton<ApiTokenService>();
+
+        services.AddRefitClient<IItemApi>()
+            .ConfigureHttpClient(client => client.BaseAddress = new Uri(configuration["WebApi"]!))
+            .AddHttpMessageHandler<HttpAuthenticationHandler>();
         return services;
     }
 }

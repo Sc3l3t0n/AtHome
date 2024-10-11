@@ -1,0 +1,10 @@
+﻿namespace AtHome.Shared.Services;
+
+public class ApiTokenService
+{
+    public string GetToken()
+    {
+        return
+            "eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCIsImtpZCI6IkI2NVBPTTB0Q3Q3MjdKY3hmT3NyMyJ9.eyJpc3MiOiJodHRwczovL2Rldi1zY2VsZXRvbi5ldS5hdXRoMC5jb20vIiwic3ViIjoiQ0RKek83bDh3NGNET0dSdnRUTnVEWkVwaHZKU0Y4dWJAY2xpZW50cyIsImF1ZCI6ImF0LWhvbWUiLCJpYXQiOjE3MjEzMzc4NzMsImV4cCI6MTcyMTQyNDI3Mywic2NvcGUiOiJyZWFkIHdyaXRlIiwiZ3R5IjoiY2xpZW50LWNyZWRlbnRpYWxzIiwiYXpwIjoiQ0RKek83bDh3NGNET0dSdnRUTnVEWkVwaHZKU0Y4dWIifQ.YvidioXiuzlz-_HnTmlgY_JmjpbdVzGi0GsmuHkhao_AVEpNXW6wgI5ZVktxiL4-fT77cz2ecd1b3VwampneDuS-JGHlCQwucEfx6Q-GfSfddX4XhqeG2Id4E-qdOYchrN1_0kpdC-jHmBo9l7VP-kZmxHwXpmwhy-lXd_LkmFt6tMrB01LGHjx5b1rD7wGCKLrM_zfZiQxQg8MFaCjeEZz2aGENJC041E-sNAgHcXy03khnSxxiLHgKeWOMuwdXxoLpA9wl8iLPWGRNG053wE_aUTzwQ8WX9zvNMyDteuhCBlmI_RRILdx9vLqqtknDx9p7x5hSci2Dtw-Mmma7Kw";
+    }
+}
