@@ -1,13 +1,14 @@
+using AtHome.Shared;
+using AtHome.Shared.Filters;
+using AtHome.Shared.Interfaces;
 using AtHome.Shared.Models;
-using AtHome.WebApi.Filter;
 using AtHome.WebApi.Interfaces;
-using AtHome.WebApi.Models;
 using Microsoft.AspNetCore.Mvc;
 
 namespace AtHome.WebApi.Controllers;
 
 [ApiController]
-[Route("api/[controller]")]
+[Route("api/items")]
 public class ItemsController : BaseController<Item>
 {
     public ItemsController(IItemRepository repository, IItemService service) : base(repository, service)

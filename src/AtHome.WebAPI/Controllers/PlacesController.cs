@@ -1,18 +1,17 @@
+using AtHome.Shared.Filters;
+using AtHome.Shared.Interfaces;
 using AtHome.Shared.Models;
-using AtHome.WebApi.Filter;
 using AtHome.WebApi.Interfaces;
-using AtHome.WebApi.Models;
 using Microsoft.AspNetCore.Mvc;
 
 namespace AtHome.WebApi.Controllers;
 
 [ApiController]
-[Route("api/[controller]")]
+[Route("api/places")]
 public class PlacesController : BaseController<Place>
 {
-    public PlacesController(IPlaceRepository repository, IPlaceService service) : base(repository, service)
-    {
-    }
+    public PlacesController(IPlaceRepository repository, IPlaceService service)
+        : base(repository, service) { }
 
     [HttpGet]
     public async Task<IActionResult> GetAll([FromQuery] PlaceFilter filter)
@@ -32,3 +31,4 @@ public class PlacesController : BaseController<Place>
         return await base.Update(id, request);
     }
 }
+

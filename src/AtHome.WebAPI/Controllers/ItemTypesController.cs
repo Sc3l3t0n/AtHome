@@ -1,18 +1,18 @@
+using AtHome.Shared;
+using AtHome.Shared.Filters;
+using AtHome.Shared.Interfaces;
 using AtHome.Shared.Models;
-using AtHome.WebApi.Filter;
 using AtHome.WebApi.Interfaces;
-using AtHome.WebApi.Models;
 using Microsoft.AspNetCore.Mvc;
 
 namespace AtHome.WebApi.Controllers;
 
 [ApiController]
-[Route("api/[controller]")]
+[Route("api/item-types")]
 public class ItemTypesController : BaseController<ItemType>
 {
-    public ItemTypesController(IItemTypeRepository repository, IItemTypeService service) : base(repository, service)
-    {
-    }
+    public ItemTypesController(IItemTypeRepository repository, IItemTypeService service)
+        : base(repository, service) { }
 
     [HttpGet]
     public async Task<IActionResult> GetAll([FromQuery] ItemTypeFilter filter)
@@ -32,3 +32,4 @@ public class ItemTypesController : BaseController<ItemType>
         return await base.Update(id, request);
     }
 }
+

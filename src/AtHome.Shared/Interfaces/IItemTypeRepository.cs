@@ -1,6 +1,6 @@
 using AtHome.Shared.Models;
 
-namespace AtHome.WebApi.Interfaces;
+namespace AtHome.Shared.Interfaces;
 
 public interface IItemTypeRepository: IRepository<ItemType>
 {

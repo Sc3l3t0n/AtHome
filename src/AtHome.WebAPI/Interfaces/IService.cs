@@ -1,4 +1,7 @@
-﻿namespace AtHome.WebApi.Interfaces;
+﻿using AtHome.Shared;
+using AtHome.Shared.Interfaces;
+
+namespace AtHome.WebApi.Interfaces;
 
 public interface IService<T>
 {

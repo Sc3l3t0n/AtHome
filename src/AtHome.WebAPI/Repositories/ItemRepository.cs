@@ -1,3 +1,4 @@
+using AtHome.Shared.Interfaces;
 using AtHome.WebApi.Database;
 using AtHome.WebApi.Interfaces;
 using AtHome.Shared.Models;

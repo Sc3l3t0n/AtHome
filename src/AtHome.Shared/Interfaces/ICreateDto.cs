@@ -1,4 +1,4 @@
-﻿namespace AtHome.WebApi.Interfaces;
+﻿namespace AtHome.Shared.Interfaces;
 
 public interface ICreateDto<T>
 {

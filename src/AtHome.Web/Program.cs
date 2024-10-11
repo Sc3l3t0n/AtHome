@@ -5,6 +5,8 @@ using AtHome.Web.Services;
 
 var builder = WebApplication.CreateBuilder(args);
 
+builder.Services.AddSharedServices(builder.Configuration);
+
 builder.AddServiceDefaults();
 
 // Add services to the container.

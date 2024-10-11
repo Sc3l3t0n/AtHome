@@ -1,4 +1,6 @@
-﻿using AtHome.WebApi.Interfaces;
+﻿using AtHome.Shared;
+using AtHome.Shared.Interfaces;
+using AtHome.WebApi.Interfaces;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 

@@ -1,7 +1,6 @@
-﻿using AtHome.Shared.Models;
-using AtHome.WebApi.Interfaces;
+﻿using AtHome.Shared.Interfaces;
 
-namespace AtHome.WebApi.Models;
+namespace AtHome.Shared.Models;
 
 public class UpdateItemTypeDto: IUpdateDto<ItemType>
 {

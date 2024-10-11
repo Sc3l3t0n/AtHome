@@ -1,7 +1,7 @@
-﻿using AtHome.WebApi.Interfaces;
+﻿using AtHome.Shared.Interfaces;
 using AtHome.Shared.Models;
 
-namespace AtHome.WebApi.Filter;
+namespace AtHome.Shared.Filters;
 
 public class ItemTypeFilter: IFilter<ItemType>
 {

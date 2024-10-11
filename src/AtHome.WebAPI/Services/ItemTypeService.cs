@@ -1,7 +1,8 @@
-﻿using AtHome.Shared.Models;
+﻿using AtHome.Shared;
+using AtHome.Shared.Interfaces;
+using AtHome.Shared.Models;
 using AtHome.WebApi.Database;
 using AtHome.WebApi.Interfaces;
-using AtHome.WebApi.Models;
 
 namespace AtHome.WebApi.Services;
 
