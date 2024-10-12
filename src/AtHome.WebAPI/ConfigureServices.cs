@@ -56,11 +56,15 @@ public static class ConfigureServices
         {
             options.Authority = authority;
             options.Audience = audience;
+#if DEBUG
+            options.RequireHttpsMetadata = false;
+#endif
+            
             options.TokenValidationParameters = new TokenValidationParameters
             {
                 ValidateIssuerSigningKey = true,
                 ValidateIssuer = true,
-                ValidateAudience = true,
+                ValidateAudience = false,
                 ValidIssuer = authority,
                 ValidAudience = audience
             };

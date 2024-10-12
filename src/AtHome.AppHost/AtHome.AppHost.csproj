@@ -11,16 +11,19 @@
     </PropertyGroup>
 
     <ItemGroup>
-        <PackageReference Include="Aspire.Hosting.AppHost" Version="8.0.2" />
-        <PackageReference Include="Aspire.Hosting.PostgreSQL" Version="8.0.2" />
         <PackageReference Include="Aspire.Hosting.AppHost" Version="8.2.1" />
         <PackageReference Include="Aspire.Hosting.PostgreSQL" Version="8.2.1" />
+        <PackageReference Include="Keycloak.AuthServices.Aspire.Hosting" Version="0.1.0" />
     </ItemGroup>
 
     <ItemGroup>
       <ProjectReference Include="..\AtHome.MigrationService\AtHome.MigrationService.csproj" />
       <ProjectReference Include="..\AtHome.WebAPI\AtHome.WebApi.csproj" />
       <ProjectReference Include="..\AtHome.Web\AtHome.Web.csproj" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <Folder Include="realms\" />
     </ItemGroup>
 
 </Project>

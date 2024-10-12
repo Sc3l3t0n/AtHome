@@ -1,6 +1,6 @@
-using Aspire.Hosting;
-
 var builder = DistributedApplication.CreateBuilder(args);
+
+var keycloak = builder.AddKeycloakContainer("keycloak").WithImport("./realms");
 
 var postgres = builder.AddPostgres("postgres").WithPgAdmin();
 
@@ -10,9 +10,10 @@ builder.AddProject<Projects.AtHome_MigrationService>("athome-migrationservice")
     .WithReference(postgresdb);
 
 var api = builder.AddProject<Projects.AtHome_WebApi>("athome-webapi")
-    .WithReference(postgresdb);
+    .WithReference(postgresdb)
+    .WithReference(keycloak);
 
 builder.AddProject<Projects.AtHome_Web>("athome-web")
     .WithReference(api);
 
-builder.Build().Run();
+await builder.Build().RunAsync();
