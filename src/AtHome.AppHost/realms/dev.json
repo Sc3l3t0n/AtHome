@@ -302,7 +302,7 @@
       "security-admin-console": [],
       "admin-cli": [],
       "account-console": [],
-      "webapi": [
+      "web-dev": [
         {
           "id": "ea5419a3-47ef-4465-9ad8-07135c2190df",
           "name": "uma_protection",
@@ -467,19 +467,19 @@
   "users": [
     {
       "id": "19e0b2e3-c40d-465b-b0ab-ecb8beef5e48",
-      "username": "service-account-webapi",
+      "username": "service-account-web-dev",
       "emailVerified": false,
       "createdTimestamp": 1728741468052,
       "enabled": true,
       "totp": false,
-      "serviceAccountClientId": "webapi",
+      "serviceAccountClientId": "web-dev",
       "disableableCredentialTypes": [],
       "requiredActions": [],
       "realmRoles": [
         "default-roles-dev"
       ],
       "clientRoles": {
-        "webapi": [
+        "web-dev": [
           "uma_protection"
         ]
       },
@@ -787,7 +787,7 @@
     },
     {
       "id": "2e8c6848-d9bf-4343-8635-32db6b7952d4",
-      "clientId": "webapi",
+      "clientId": "web-dev",
       "name": "",
       "description": "",
       "rootUrl": "",
@@ -797,7 +797,7 @@
       "enabled": true,
       "alwaysDisplayInConsole": false,
       "clientAuthenticatorType": "client-secret",
-      "secret": "**********",
+      "secret": "secret",
       "redirectUris": [
         "/*"
       ],

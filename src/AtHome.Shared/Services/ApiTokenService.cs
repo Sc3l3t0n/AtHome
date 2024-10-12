@@ -1,10 +1,139 @@
-﻿namespace AtHome.Shared.Services;
+﻿using System.Net.Http.Headers;
+using System.Text;
+using System.Text.Json;
+using AtHome.Shared.Configuration;
+using Microsoft.Extensions.Configuration;
+using System.IdentityModel.Tokens.Jwt;
+
+namespace AtHome.Shared.Services;
 
 public class ApiTokenService
 {
-    public string GetToken()
+    /// <summary>
+    /// Httpclient of the service.
+    /// </summary>
+    private readonly HttpClient _httpClient;
+
+    /// <summary>
+    /// Client configuration for token requesting.
+    /// </summary>
+    private readonly ClientConfiguration _client;
+
+    /// <summary>
+    /// Current jwt in as parsed object
+    /// </summary>
+    private JwtSecurityToken? _currentJwt;
+    
+    /// <summary>
+    /// Current jwt in raw form
+    /// </summary>
+    private string? _currentRawJwt;
+
+    /// <summary>
+    /// Determines if the current token is still valid
+    /// </summary>
+    private bool TokenValid => _currentJwt is not null &&
+                               _currentJwt.ValidTo - DateTime.Now > new TimeSpan(0, 2, 0);
+
+    public ApiTokenService(HttpClient httpClient, IConfiguration configuration)
     {
-        return
-            "eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCIsImtpZCI6IkI2NVBPTTB0Q3Q3MjdKY3hmT3NyMyJ9.eyJpc3MiOiJodHRwczovL2Rldi1zY2VsZXRvbi5ldS5hdXRoMC5jb20vIiwic3ViIjoiQ0RKek83bDh3NGNET0dSdnRUTnVEWkVwaHZKU0Y4dWJAY2xpZW50cyIsImF1ZCI6ImF0LWhvbWUiLCJpYXQiOjE3MjEzMzc4NzMsImV4cCI6MTcyMTQyNDI3Mywic2NvcGUiOiJyZWFkIHdyaXRlIiwiZ3R5IjoiY2xpZW50LWNyZWRlbnRpYWxzIiwiYXpwIjoiQ0RKek83bDh3NGNET0dSdnRUTnVEWkVwaHZKU0Y4dWIifQ.YvidioXiuzlz-_HnTmlgY_JmjpbdVzGi0GsmuHkhao_AVEpNXW6wgI5ZVktxiL4-fT77cz2ecd1b3VwampneDuS-JGHlCQwucEfx6Q-GfSfddX4XhqeG2Id4E-qdOYchrN1_0kpdC-jHmBo9l7VP-kZmxHwXpmwhy-lXd_LkmFt6tMrB01LGHjx5b1rD7wGCKLrM_zfZiQxQg8MFaCjeEZz2aGENJC041E-sNAgHcXy03khnSxxiLHgKeWOMuwdXxoLpA9wl8iLPWGRNG053wE_aUTzwQ8WX9zvNMyDteuhCBlmI_RRILdx9vLqqtknDx9p7x5hSci2Dtw-Mmma7Kw";
+        httpClient.BaseAddress =
+            new Uri(configuration["Auth:TokenUrl"] ?? throw new ArgumentException("Auth:TokenUrl must be set"));
+        _httpClient = httpClient;
+        _client = configuration.GetSection("Auth:Client").Get<ClientConfiguration>();
+    }
+
+    /// <summary>
+    /// Returns a jwt token.
+    /// Only requests a new one if the old one is expired.
+    /// </summary>
+    public async Task<ErrorOr<JwtSecurityToken>> GetToken()
+    {
+        if (TokenValid) return _currentJwt!;
+
+        var token = await RetrieveToken();
+
+        if (token.IsError) return token.Errors;
+
+        var jwt = ParseJwt(token.Value);
+
+        if (jwt is null) return Error.Failure("Could not parse Token");
+
+        SetCurrentToken(token.Value, jwt);
+
+        return jwt;
+    }
+
+    /// <summary>
+    /// Returns a raw jwt token.
+    /// Only requests a new one if the old one is expired.
+    /// </summary>
+    public async Task<ErrorOr<string>> GetRawToken()
+    {
+        if (TokenValid) return _currentRawJwt!;
+
+        var token = await RetrieveToken();
+
+        if (token.IsError) return token.Errors;
+
+        SetCurrentToken(token.Value);
+
+        return token.Value;
+    }
+
+    /// <summary>
+    /// Retrieve the token from the identity provider.
+    /// </summary>
+    private async Task<ErrorOr<string>> RetrieveToken()
+    {
+        var authToken = Encoding.ASCII.GetBytes($"{_client.ClientId}:{_client.ClientSecret}");
+        _httpClient.DefaultRequestHeaders.Authorization =
+            new AuthenticationHeaderValue("Basic", Convert.ToBase64String(authToken));
+
+        var requestData = new FormUrlEncodedContent(new[]
+        {
+            new KeyValuePair<string, string>("grant_type", "client_credentials")
+        });
+
+        var response = await _httpClient.PostAsync("", requestData);
+
+        if (!response.IsSuccessStatusCode) return Error.Failure("Could not retrieve a Token");
+        var content = await response.Content.ReadAsStringAsync();
+
+        var token = JsonDocument.Parse(content).RootElement.GetProperty("access_token").GetString();
+        if (token is null) return Error.Failure("Could not retrieve a Token");
+
+        return token;
+    }
+
+    /// <summary>
+    /// Set current token for caching.
+    /// </summary>
+    /// <param name="jwt">Current raw token.</param>
+    private void SetCurrentToken(string jwt)
+    {
+        SetCurrentToken(jwt, ParseJwt(jwt)!);
+    }
+
+    /// <summary>
+    /// Set current token for caching.
+    /// </summary>
+    /// <param name="rawJwt">Current raw token.</param>
+    /// <param name="jwt">Current parsed token.</param>
+    private void SetCurrentToken(string rawJwt, JwtSecurityToken jwt)
+    {
+        _currentJwt = jwt;
+        _currentRawJwt = rawJwt;
+    }
+
+    /// <summary>
+    /// Parses a jwt to retrieve the information of it.
+    /// </summary>
+    /// <param name="jwt">Raw jwt token.</param>
+    /// <returns>The token or null if it couldn't be parsed.</returns>
+    private static JwtSecurityToken? ParseJwt(string jwt)
+    {
+        var handler = new JwtSecurityTokenHandler();
+        return !handler.CanReadToken(jwt) ? null : handler.ReadJwtToken(jwt);
     }
 }
