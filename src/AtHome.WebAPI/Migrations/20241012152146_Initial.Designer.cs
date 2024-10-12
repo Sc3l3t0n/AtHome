@@ -9,10 +9,10 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
 #nullable disable
 
-namespace atHome.Migrations
+namespace AtHome.WebApi.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20240703204333_Initial")]
+    [Migration("20241012152146_Initial")]
     partial class Initial
     {
         /// <inheritdoc />
@@ -20,12 +20,12 @@ namespace atHome.Migrations
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("ProductVersion", "8.0.6")
+                .HasAnnotation("ProductVersion", "8.0.10")
                 .HasAnnotation("Relational:MaxIdentifierLength", 63);
 
             NpgsqlModelBuilderExtensions.UseIdentityByDefaultColumns(modelBuilder);
 
-            modelBuilder.Entity("atHome.Models.Item", b =>
+            modelBuilder.Entity("AtHome.Shared.Models.Item", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -68,7 +68,7 @@ namespace atHome.Migrations
                     b.ToTable("Items");
                 });
 
-            modelBuilder.Entity("atHome.Models.ItemType", b =>
+            modelBuilder.Entity("AtHome.Shared.Models.ItemType", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -85,7 +85,7 @@ namespace atHome.Migrations
                     b.ToTable("ItemTypes");
                 });
 
-            modelBuilder.Entity("atHome.Models.Place", b =>
+            modelBuilder.Entity("AtHome.Shared.Models.Place", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -106,15 +106,15 @@ namespace atHome.Migrations
                     b.ToTable("Places");
                 });
 
-            modelBuilder.Entity("atHome.Models.Item", b =>
+            modelBuilder.Entity("AtHome.Shared.Models.Item", b =>
                 {
-                    b.HasOne("atHome.Models.Place", "Place")
+                    b.HasOne("AtHome.Shared.Models.Place", "Place")
                         .WithMany()
                         .HasForeignKey("PlaceId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("atHome.Models.ItemType", "Type")
+                    b.HasOne("AtHome.Shared.Models.ItemType", "Type")
                         .WithMany()
                         .HasForeignKey("TypeId")
                         .OnDelete(DeleteBehavior.Cascade)

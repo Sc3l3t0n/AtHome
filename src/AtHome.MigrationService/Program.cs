@@ -6,4 +6,4 @@ builder.AddNpgsqlDbContext<ApplicationDbContext>("athome");
 builder.Services.AddHostedService<Worker>();
 
 var host = builder.Build();
-host.Run();
+await host.RunAsync();
