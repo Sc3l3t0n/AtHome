@@ -4,6 +4,7 @@ using AtHome.Shared.Handler;
 using AtHome.Shared.Services;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using MudBlazor.Services;
 using Refit;
 
 namespace AtHome.Shared;
@@ -13,7 +14,8 @@ public static class ConfigureServices
     public static IServiceCollection AddSharedServices(this IServiceCollection services, IConfiguration configuration)
     {
         services.AddRefitClients(configuration);
-        
+        services.AddMudServices();
+
         return services;
     }
 
