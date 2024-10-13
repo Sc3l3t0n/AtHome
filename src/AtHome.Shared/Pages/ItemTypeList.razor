@@ -1,4 +1,4 @@
-﻿@page "/item-list"
+﻿@page "/itemtype-list"
 
 @if (_data.IsError)
 {
@@ -24,15 +24,11 @@ else
     <MudDataGrid Items="_data.Value">
         <Columns>
             <PropertyColumn Property="x => x.Name" Title="Name"></PropertyColumn>
-            <PropertyColumn Property="x => x.Description" Title="Description"></PropertyColumn>
-            <PropertyColumn Property="x => x.Amount" Title="Amount"></PropertyColumn>
-            <PropertyColumn Property="x => x.Type" Title="Type"></PropertyColumn>
-            <PropertyColumn Property="x => x.Place" Title="Place"></PropertyColumn>
             <TemplateColumn>
                 <CellTemplate>
-                    <MudIconButton Size="@Size.Small" Icon="@Icons.Material.Outlined.Edit" OnClick="@context.Actions.StartEditingItemAsync" />
+                    <MudIconButton Size="@Size.Small" Icon="@Icons.Material.Outlined.Edit" OnClick="@context.Actions.StartEditingItemAsync"/>
                 </CellTemplate>
-            </TemplateColumn> 
+            </TemplateColumn>
         </Columns>
     </MudDataGrid>
 }
