@@ -1,14 +1,43 @@
 ﻿@page "/"
-@using AtHome.Shared.Services
-@inject IFormFactor FormFactor
+<MudContainer Class="mt-5">
+    <MudText Typo="@Typo.h4">@@Home Dashboard</MudText>
 
-<PageTitle>Home</PageTitle>
+    <MudGrid Spacing="5" Justify="@Justify.Center" Class="mt-4">
 
-<h1>Hello, world!</h1>
+        <MudItem xs="4">
+            <MudCard Outlined="true" Elevation="3">
+                <MudCardContent>
+                    <MudText Typo="Typo.h6">There are __ new items</MudText>
+                    <MudText Typo="Typo.body2">These items were never added before.</MudText>
+                </MudCardContent>
+                <MudCardActions>
+                    <MudButton Variant="Variant.Text" Color="Color.Primary">See More</MudButton>
+                </MudCardActions>
+            </MudCard>
+        </MudItem>
 
-Welcome to your new app running on <em>@factor</em> using <em>@platform</em>.
+        <MudItem xs="4">
+            <MudCard Outlined="true" Elevation="3">
+                <MudCardContent>
+                    <MudText Typo="Typo.h6">There are __ expiring items</MudText>
+                    <MudText Typo="Typo.body2">These items are 1 week away of expiring.</MudText>
+                </MudCardContent>
+                <MudCardActions>
+                    <MudButton Variant="Variant.Text" Color="Color.Primary">Take A Look</MudButton>
+                </MudCardActions>
+            </MudCard>
+        </MudItem>
 
-@code {
-    private string factor => FormFactor.GetFormFactor();
-    private string platform => FormFactor.GetPlatform();
-}
+        <MudItem xs="4">
+            <MudCard Outlined="true" Elevation="3">
+                <MudCardContent>
+                    <MudText Typo="Typo.h6">Recipes to cook</MudText>
+                    <MudText Typo="Typo.body2">Recipes that can be done with your ingredients</MudText>
+                </MudCardContent>
+                <MudCardActions>
+                    <MudButton Variant="Variant.Text" Color="Color.Primary">See More</MudButton>
+                </MudCardActions>
+            </MudCard>
+        </MudItem>
+    </MudGrid>
+</MudContainer>
